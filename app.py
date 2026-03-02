@@ -27,13 +27,13 @@ def fetch_holdings():
     return requests.get(f"{BASE_URL}/holdings", headers=HEADERS).json()
 
 def get_kill_switch_status():
-    return requests.get(f"{BASE_URL}/killSwitch", headers=HEADERS).json()
+    return requests.get(f"{BASE_URL}/killswitch", headers=HEADERS).json()
 
 def activate_kill_switch():
-    return requests.post(f"{BASE_URL}/killSwitch", headers=HEADERS).json()
+    return requests.post(f"{BASE_URL}/killswitch", headers=HEADERS).json()
 
 def deactivate_kill_switch():
-    return requests.delete(f"{BASE_URL}/killSwitch", headers=HEADERS).json()
+    return requests.delete(f"{BASE_URL}/killswitch", headers=HEADERS).json()
 
 # ==============================
 # P&L CALCULATION
