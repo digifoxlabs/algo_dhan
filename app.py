@@ -58,13 +58,22 @@ def calculate_pnl_summary():
         "total_pnl": round(total_pnl, 2)
     }
 
+def fetch_profile():
+    try:
+        response = requests.get(f"{BASE_URL}/profile", headers=HEADERS, timeout=10)
+        return response.json()
+    except Exception as e:
+        return {"error": str(e)}
+
 # ==============================
 # ROUTES
 # ==============================
 
 @app.route("/")
 def dashboard():
-    return render_template("dashboard.html")
+    profile = fetch_profile()
+    name = profile.get("dhanClientId", "Trader")
+    return render_template("dashboard.html", name=name)
 
 @app.route("/api/orders")
 def api_orders():
@@ -97,6 +106,10 @@ def api_kill_deactivate():
 @app.route("/api/pnl-summary")
 def api_pnl_summary():
     return jsonify(calculate_pnl_summary())
+
+@app.route("/api/profile")
+def api_profile():
+    return jsonify(fetch_profile())
 
 # ==============================
 # RUN SERVER
